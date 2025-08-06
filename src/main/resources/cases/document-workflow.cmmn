@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+    xmlns="http://www.omg.org/spec/CMMN/20151109/MODEL"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:flowable="http://flowable.org/cmmn"
+    targetNamespace="http://flowable.org/cmmn"
+    xsi:schemaLocation="http://www.omg.org/spec/CMMN/20151109/MODEL http://www.omg.org/spec/CMMN/20151109/CMMN11.xsd">
+
+    <case id="documentCase" name="Document Workflow">
+        <casePlanModel id="casePlanModel" name="Document Workflow Case" flowable:autoComplete="false">
+
+            <!-- ✅ Stage containing all planItemDefinitions -->
+            <stage id="documentStage" name="Document Handling Stage">
+                <humanTask id="uploadTaskDef" name="Upload Document" flowable:assignee="${initiator}"/>
+                <humanTask id="reviewTaskDef" name="Review Document" flowable:assignee="reviewer"/>
+                <humanTask id="downloadTaskDef" name="Download Document" flowable:assignee="${initiator}"/>
+            </stage>
+
+            <!-- ✅ Plan items referencing definitions -->
+            <planItem id="uploadTask" name="Upload Document" definitionRef="uploadTaskDef"/>
+
+            <planItem id="reviewTask" name="Review Document" definitionRef="reviewTaskDef">
+                <entryCriterion sentryRef="uploadCompleteSentry"/>
+            </planItem>
+
+            <planItem id="downloadTask" name="Download Document" definitionRef="downloadTaskDef">
+                <entryCriterion sentryRef="reviewApprovedSentry"/>
+            </planItem>
+
+            <planItem id="repeatUploadTask" name="Re-Upload Document" definitionRef="uploadTaskDef">
+                <entryCriterion sentryRef="reviewRejectedSentry"/>
+            </planItem>
+
+            <!-- ✅ Sentries -->
+            <sentry id="uploadCompleteSentry">
+                <planItemOnPart sourceRef="uploadTask">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+            </sentry>
+
+            <sentry id="reviewApprovedSentry">
+                <planItemOnPart sourceRef="reviewTask">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+                <ifPart>
+                    <condition>${reviewOutcome == 'approved'}</condition>
+                </ifPart>
+            </sentry>
+
+            <sentry id="reviewRejectedSentry">
+                <planItemOnPart sourceRef="reviewTask">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+                <ifPart>
+                    <condition>${reviewOutcome == 'rejected'}</condition>
+                </ifPart>
+            </sentry>
+        </casePlanModel>
+    </case>
+</definitions>
