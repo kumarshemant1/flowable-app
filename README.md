@@ -15,4 +15,4 @@ GET /workflows/{caseId}/tasks/{taskId}/files – Download files
 
 POST /workflows/{caseId}/tasks/{taskId}/reupload – Reupload a file
 
-POST /workflows/{caseId}/consolidate – Consolida
+POST /workflows/{caseId}/consolidate – Consolidate
