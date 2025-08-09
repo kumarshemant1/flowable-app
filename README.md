@@ -22,7 +22,7 @@ curl -X POST http://localhost:8080/api/workflows/start \
         "taskType": "UPLOAD",
         "businessFiles": [],
         "businessRoles": ["uploader"],
-        "completionDay": 1
+        "completionDay": "2025-08-09T16:43:00"
       }
     ]
   }'
