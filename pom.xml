@@ -61,7 +61,7 @@
 		<dependency>
 			<groupId>org.flowable</groupId>
 			<artifactId>flowable-spring-boot-starter-rest</artifactId>
-			<version>6.8.1</version>
+			<version>7.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.flowable</groupId>
@@ -70,11 +70,11 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.flowable/flowable-content-engine -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.flowable</groupId>
 			<artifactId>flowable-content-engine</artifactId>
-			<version>6.8.1</version>
-		</dependency>
+			<version>7.0.0</version>
+		</dependency> -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
