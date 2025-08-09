@@ -11,11 +11,13 @@ import org.flowable.cmmn.api.CmmnRuntimeService;
 import org.flowable.cmmn.api.CmmnTaskService;
 import org.flowable.cmmn.api.runtime.CaseInstance;
 import org.flowable.task.api.Task;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import app.flow.model.BusinessFile;
 import app.flow.model.Workflow;
 
+@Service
 public class WorkflowService {
 
 	private CmmnRuntimeService cmmnRuntimeService;
