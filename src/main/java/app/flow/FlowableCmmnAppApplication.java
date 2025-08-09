@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 @SpringBootApplication
 public class FlowableCmmnAppApplication {
@@ -14,8 +15,10 @@ public class FlowableCmmnAppApplication {
 	}
 	
 	@Bean
-	public ObjectMapper objectMapper() {
-	    return new ObjectMapper();
-	}
+    public ObjectMapper objectMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        return mapper;
+    }
 
 }
